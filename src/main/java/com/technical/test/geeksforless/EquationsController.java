@@ -45,7 +45,7 @@ public class EquationsController {
     @GetMapping("/searchBySingleRoot")
     public  String findBySingleRoot(Model model, @ModelAttribute("rootWrapper") @Valid RootWrapper wrapper,
                                     BindingResult rootResult) {
-        if(rootResult.hasErrors())
+        if(wrapper.getPossibleRoots().get(0).isEmpty() || rootResult.hasErrors())
             return "searchByRoot";
 
         model.addAttribute("equations", equationsService.findAllBySingleRoot(wrapper));
@@ -56,7 +56,7 @@ public class EquationsController {
     @GetMapping("/searchByOneOfRoots")
     public  String findByRoot(Model model, @ModelAttribute("rootWrapper") @Valid RootWrapper wrapper,
                                     BindingResult rootResult) {
-        if(rootResult.hasErrors())
+        if(wrapper.getPossibleRoots().get(0).isEmpty() || rootResult.hasErrors())
             return "searchByRoot";
 
         model.addAttribute("equations", equationsService.findAllByRoot(wrapper));

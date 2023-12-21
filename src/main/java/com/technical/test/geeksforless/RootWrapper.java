@@ -19,7 +19,7 @@ public class RootWrapper {
     }
 
     private List<
-            @NotEmpty(message = "Please enter a decimal number")
+//            @NotEmpty(message = "Please enter a decimal number")
             @Pattern(regexp = "^\\s*(-?\\d+(\\.\\d+)?\\s*)?$", message="Please enter a valid decimal number")
                     String> possibleRoots;
 
