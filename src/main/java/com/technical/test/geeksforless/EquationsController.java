@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,10 +17,17 @@ import java.util.UUID;
 @RequestMapping("/equations")
 public class EquationsController {
     private final EquationsService equationsService;
+    private final EquationValidator equationValidator;
 
     @Autowired
-    public EquationsController(EquationsService equationsService) {
+    public EquationsController(EquationsService equationsService, EquationValidator equationValidator) {
         this.equationsService = equationsService;
+        this.equationValidator = equationValidator;
+    }
+
+    @InitBinder("equation")
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(equationValidator);
     }
 
     @GetMapping()

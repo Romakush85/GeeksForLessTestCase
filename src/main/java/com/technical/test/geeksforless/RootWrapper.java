@@ -1,5 +1,7 @@
 package com.technical.test.geeksforless;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.stereotype.Component;
@@ -17,7 +19,8 @@ public class RootWrapper {
     }
 
     private List<
-    @Pattern(regexp = "^\\s*(-?\\d+(\\.\\d+)?\\s*)?$", message="Please enter a valid decimal number")
+            @NotEmpty(message = "Please enter a decimal number")
+            @Pattern(regexp = "^\\s*(-?\\d+(\\.\\d+)?\\s*)?$", message="Please enter a valid decimal number")
                     String> possibleRoots;
 
 }

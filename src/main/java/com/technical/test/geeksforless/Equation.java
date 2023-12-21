@@ -1,6 +1,7 @@
 package com.technical.test.geeksforless;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -21,7 +22,8 @@ public class Equation {
 
     @Column(name="expression", nullable=false)
     @NotEmpty
-    @Pattern(regexp = "^[-+*/.\\d\\s()]*x[-+*/.\\d\\s()=]+$|^[-+*/.\\d\\s()=]+x[-+*/.\\d\\s()]+$", message="The Equation is invalid")
+    @Valid
+ //   @Pattern(regexp = "^[-+*/.\\d\\s()]*x[-+*/.\\d\\s()=]+$|^[-+*/.\\d\\s()=]+x[-+*/.\\d\\s()]+$", message="The Equation is invalid")
     private String expression;
 
     @ElementCollection

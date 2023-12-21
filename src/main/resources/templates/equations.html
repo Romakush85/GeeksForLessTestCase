@@ -26,7 +26,15 @@
             <tbody>
             <tr th:each="equation : ${equations}">
                 <td th:text="${equation.expression}"></td>
-                <td th:text="${equation.roots}"></td>
+                <td>
+                    <span th:if="${#lists.isEmpty(equation.roots)}">No saved roots</span>
+                    <span th:if="${not #lists.isEmpty(equation.roots)}" >
+                        <span th:each="root, iterStat : ${equation.roots}">
+                        <span th:text="${root}"></span>
+                        <span th:if="${!iterStat.last}">, </span>
+                    </span>
+                    </span>
+                </td>
                 <td>
                     <form th:method="DELETE" th:action="@{/equations/{id}(id=${equation.getId()})}">
                         <input type="submit" value="Delete equation"/>
