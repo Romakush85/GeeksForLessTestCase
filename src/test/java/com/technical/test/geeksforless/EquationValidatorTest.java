@@ -2,12 +2,15 @@ package com.technical.test.geeksforless;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class EquationValidatorTest {
 
-    private final EquationValidator validator = new EquationValidator();
+    @Autowired
+    private  EquationValidator validator;
 
     private final String[] validEquations = {
             "2*x+5=17",

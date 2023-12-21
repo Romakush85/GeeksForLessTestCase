@@ -23,7 +23,6 @@ public class Equation {
     @Column(name="expression", nullable=false)
     @NotEmpty
     @Valid
- //   @Pattern(regexp = "^[-+*/.\\d\\s()]*x[-+*/.\\d\\s()=]+$|^[-+*/.\\d\\s()=]+x[-+*/.\\d\\s()]+$", message="The Equation is invalid")
     private String expression;
 
     @ElementCollection
