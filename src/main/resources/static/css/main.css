@@ -1,0 +1,31 @@
+body {
+    padding-top: 10px;
+    background-image: url(http://localhost:8080/images/notepad-calculator.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    color: #1d1d7f;
+}
+header{
+    text-align: center;
+    min-height:60px;
+}
+footer{
+    min-height:50px;
+    color: white;
+}
+article{
+    flex:1;
+}
+
+.container {
+    background:white;
+    opacity: 0.75;
+    overflow-y: auto;
+    padding:10px;
+}
+

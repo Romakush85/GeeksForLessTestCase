@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout.html}"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Equations</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div class="container" th:if="${#lists.isEmpty(equations)}"
+         style="background:white; opacity: 0.7; overflow-y: auto">
+        <h3> You haven't any saved equation </h3>
+    </div>
+
+    <div class="container" th:if="${not #lists.isEmpty(equations)}">
+        <table id="prod-table" class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Equation</th>
+                <th scope="col">Roots</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="equation : ${equations}">
+                <td th:text="${equation.expression}"></td>
+                <td th:text="${equation.roots}"></td>
+                <td>
+                    <form th:method="DELETE" th:action="@{/equations/{id}(id=${equation.getId()})}">
+                        <input type="submit" value="Delete equation"/>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Equations</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+
+    <div class="container" >
+        <h3> Enter the root to find available equations  </h3>
+        <form  method="GET" th:object="${rootWrapper}" id="searchForm" th:action="@{/equations}">
+            <label for="root">
+                <input type="text" id="root" name="possibleRoots[0]" th:field="*{possibleRoots[0]}" />
+            </label>
+            <div th:if="${#fields.hasErrors('possibleRoots[0]')}" th:errors="*{possibleRoots[0]}"></div>
+            <button type="button" onclick="setFormAction('/equations/searchBySingleRoot')" >Find by single root</button>
+            <button type="button" onclick="setFormAction('/equations/searchByOneOfRoots')" >Find by one of the roots</button>
+        </form>
+        <div  th:if="${not #lists.isEmpty(equations)}" >
+            <table id="prod-table" class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Equation</th>
+                    <th scope="col">Roots</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="equation : ${equations}">
+                    <td th:text="${equation.expression}"></td>
+                    <td th:text="${equation.roots}"></td>
+                    <td>
+                        <form th:method="DELETE" th:action="@{/equations/{id}(id=${equation.getId()})}">
+                            <input type="submit" value="Delete equation"/>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<script layout:fragment="script" th:inline="javascript">
+    function setFormAction(action) {
+        document.getElementById('searchForm').action = action;
+        document.getElementById('searchForm').submit();
+    }
+
+</script>
+</body>
+</html>

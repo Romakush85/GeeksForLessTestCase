@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<nav th:fragment="navbar" class="navbar-expand-md border-bottom">
+    <div class="text-center mt-0 collapse navbar-collapse">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/equations}">My equations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/equations/new}">Create equation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/equations/searchByRoot}">Find by root</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+</body>
+
+</html>

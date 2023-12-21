@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>New equation</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form class="container" th:method="POST" th:action="@{/equations}">
+        <h2>Equation:</h2>
+        <div th:object="${equation}">
+            <label>Enter expression:</label>
+            <label>
+                <input type="text" th:field="*{expression}" />
+            </label>
+            <div style="color:darkred" th:if="${#fields.hasErrors('expression')}" th:errors="*{expression}">Expression error</div>
+        </div>
+        <div th:object="${rootWrapper}" id="rootSection">
+            <label>Enter root:</label>
+            <div id="rootInputs">
+                <div th:each="root : ${rootWrapper.possibleRoots}" >
+                </div>
+            </div>
+        </div>
+        <button type="button" onclick="addRoot()">Add root</button>
+        <input type="submit" value="Save!"/>
+    </form>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+    function addRoot() {
+        var rootInputs = document.getElementById('rootInputs');
+        var currentIndex = rootInputs.children.length;
+
+        var newRootDiv = document.createElement('div');
+        newRootDiv.innerHTML = '<input type="text"  th:field="*{possibleRoots[' + currentIndex + ']}"  name="possibleRoots[' + currentIndex + ']"/>' +
+            '<div style="color:darkred" th:if="${#fields.hasErrors(\'possibleRoots[' + currentIndex + ']\')}" th:errors="*{possibleRoots[' + currentIndex + ']}"></div>';
+
+        rootInputs.insertBefore(newRootDiv, rootInputs.lastElementChild);
+    }
+</script>
+</body>
+</html>
